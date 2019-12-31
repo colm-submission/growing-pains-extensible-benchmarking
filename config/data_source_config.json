@@ -1,0 +1,53 @@
+{
+  "_description": "Item-level response data for the two benchmark suites used in the paper",
+
+  "datasets": {
+    "ARC Challenge": {
+      "source_type": "pickle",
+      "source_file": "lb.pickle",
+      "pickle_keys": ["harness_arc_challenge_25"],
+      "models": 395,
+      "items": 1212
+    },
+    "GSM8K": {
+      "source_type": "pickle",
+      "source_file": "lb.pickle",
+      "pickle_keys": ["harness_gsm8k_5"],
+      "models": 395,
+      "items": 1359
+    },
+    "HellaSwag": {
+      "source_type": "pickle",
+      "source_file": "lb.pickle",
+      "pickle_keys": ["harness_hellaswag_10"],
+      "models": 395,
+      "items": 10082
+    },
+    "MMLU": {
+      "source_type": "pickle",
+      "source_file": "mmlu_fields.pickle",
+      "pickle_keys": null,
+      "pickle_key_pattern": "hendrycksTest",
+      "models": 428,
+      "items": 28084
+    },
+    "TruthfulQA": {
+      "source_type": "pickle",
+      "source_file": "lb.pickle",
+      "pickle_keys": ["harness_truthfulqa_mc_0"],
+      "models": 395,
+      "items": 857
+    },
+    "Winogrande": {
+      "source_type": "pickle",
+      "source_file": "lb.pickle",
+      "pickle_keys": ["harness_winogrande_5"],
+      "models": 395,
+      "items": 1307
+    }
+  },
+
+  "paths": {
+    "input_dir": "data/input"
+  }
+}

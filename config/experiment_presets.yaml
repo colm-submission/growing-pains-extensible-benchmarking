@@ -1,0 +1,70 @@
+# Experiment presets for reproducing paper results
+#
+# Use with: python src/chain_experiment.py --preset <preset_name>
+# Or run the full sweep: python scripts/run_sweep.py --category <cat>
+
+# Global defaults
+defaults:
+  seed: 42
+  random_seed: 1000
+  dims: [5]
+  epochs: 2000
+  epochs_fixed: 1000
+  test_ratio: 0.25      # 75% reference models / 25% test models (Section 4.1)
+  split_mode: random    # random | time_ordered | noniid (efficbench temporal)
+  num_workers: 4
+
+# SLURM resource hints (passed at submission time, not enforced here)
+slurm_defaults:
+  memory: 16g
+  gpus: 4
+  cpus: 2
+  time: "6:0:0"
+  mail_type: END,FAIL,TIME_LIMIT
+
+presets:
+  # ============================================================================
+  # Open LLM Leaderboard (6 datasets, 395 models) — Table 1, Figure 2
+  # ============================================================================
+
+  lb_standard:
+    description: "Main LB experiment: 100 anchor items, all reference models"
+    data_source_mode: lb
+    n_base: 1
+    max_chain: 5
+    n_anchors: 100
+    n_models_per_chain: null
+
+  # Anchor budget ablation — Figure 3 (LB)
+  lb_anchors_25:
+    description: "LB anchor ablation: 25 anchor items"
+    data_source_mode: lb
+    n_base: 1
+    max_chain: 5
+    n_anchors: 25
+
+  lb_anchors_50:
+    description: "LB anchor ablation: 50 anchor items"
+    data_source_mode: lb
+    n_base: 1
+    max_chain: 5
+    n_anchors: 50
+
+  lb_anchors_200:
+    description: "LB anchor ablation: 200 anchor items"
+    data_source_mode: lb
+    n_base: 1
+    max_chain: 5
+    n_anchors: 200
+
+  # ============================================================================
+  # MMLU (57 subjects, 428 models) — Table 1, Figure 2
+  # ============================================================================
+
+  mmlu_fields:
+    description: "Main MMLU experiment: 25 anchor items per subject, all reference models"
+    data_source_mode: mmlu_fields
+    n_base: 8
+    max_chain: 10
+    n_anchors: 25
+    # SLURM: use --mem=8g --time=24:0:0 when submitting
